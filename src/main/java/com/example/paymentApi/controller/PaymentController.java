@@ -34,9 +34,7 @@ public class PaymentController {
 
   @PostMapping("/payment/new")
   public Payment savePayment(@RequestBody Payment payment) {
-
-    payment.setPaymentStatus("Pendente de Processamento");
-    return repository.save(payment);
+    return PaymentModel(payment);
   }
 
     private Payment PaymentModel(Payment payment) {
