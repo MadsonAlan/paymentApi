@@ -38,7 +38,7 @@ public class Payment {
   @NotNull
   String paymentMethod;
 
-  Integer cardNumber;
+  String cardNumber;
 
   @NotNull
   BigDecimal paymentValue;
