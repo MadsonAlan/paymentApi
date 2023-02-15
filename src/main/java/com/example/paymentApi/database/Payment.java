@@ -44,5 +44,6 @@ public class Payment {
   BigDecimal paymentValue;
   
   @Column(columnDefinition = "varchar(90) default 'Pendente de Processamento'")
+  @NotNull
   String paymentStatus;
 }
