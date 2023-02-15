@@ -1,4 +1,4 @@
-package com.example.paymentApi.database;
+package com.example.paymentapi.database;
 
 import java.math.BigDecimal;
 
