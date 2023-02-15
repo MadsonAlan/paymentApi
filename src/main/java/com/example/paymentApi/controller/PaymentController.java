@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 
 import com.example.paymentapi.database.Payment;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +29,7 @@ public class PaymentController {
 
   @GetMapping("/payment/{id}")
   public Payment getPaymentByID(@PathVariable Long id) {
-    return repository.findByID(id).get();
+    return repository.findById(id).get();
   }
 
   @PostMapping("/payment/new")
@@ -36,9 +37,28 @@ public class PaymentController {
     return PaymentModel(payment);
   }
 
+    private Payment PaymentModel(Payment payment) {
+      String[] paymentMethods = {"boleto", "pix", "cartao_credito", "cartao_debito"};
+      boolean contains = Arrays.stream(paymentMethods).anyMatch(payment.getPaymentMethod()::equals);
+      System.out.println(payment.getPaymentMethod().toString() == paymentMethods[2]);
+      if ((payment.getPaymentMethod() == paymentMethods[2] || payment.getPaymentMethod() == paymentMethods[3]) && payment.getCardNumber() > 0){
+
+        System.out.println("falha de cartão");
+        // payment.setPaymentStatus("Processado com Falha");
+        return repository.save(payment);
+
+      }
+      if(contains){
+        System.out.println(contains);
+        // payment.setPaymentStatus("Processado com Sucesso");
+        return repository.save(payment);
+      }
+      return repository.save(payment);
+    }
+
   @DeleteMapping("/payment/{id}")
-  public Payment deletePayment(@PathVariable Long id) {
-    Payment paymentValidator = repository.findByID(id).get();
+  public void deletePayment(@PathVariable Long id) {
+    Payment paymentValidator = repository.findById(id).get();
     if (paymentValidator.getPaymentStatus() == "Pendente de Processamento"){
       repository.deleteById(id);
     }
