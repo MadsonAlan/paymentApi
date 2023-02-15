@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,11 +57,28 @@ public class PaymentController {
       return repository.save(payment);
     }
 
+  @PutMapping("/payment/{id}")
+  public Payment UpdatePaymentStatus(@PathVariable Long id, @RequestBody Payment payment) {    
+    Payment newObj = repository.findById(id).get();  
+    if(newObj.getPaymentStatus().equals("Processado com Sucesso")){
+      throw new Error("Não é possivel atualizar pagamento processado com sucesso");
+    }
+    if(newObj.getPaymentStatus().equals("Processado com Falha") && payment.getPaymentStatus().equals("Processado com Sucesso")){
+      throw new Error("É necessario torná-lo pendente de processamento primeiro");
+    }
+    if (payment.getPaymentStatus().equals("Processado com Falha") || payment.getPaymentStatus().equals("Processado com Sucesso") || payment.getPaymentStatus().equals("Pendente de Processamento")) {
+      newObj.setPaymentStatus(payment.getPaymentStatus());
+      return repository.save(newObj);
+    }else
+    throw new Error("Status invalido");
+  }
+
   @DeleteMapping("/payment/{id}")
   public void deletePayment(@PathVariable Long id) {
     Payment paymentValidator = repository.findById(id).get();
     if (paymentValidator.getPaymentStatus().equals("Pendente de Processamento")){
       repository.deleteById(id);
-    }
+    }else
+    throw new Error("Impossível excluir pagamentos que deixaram de ser pendentes");
   }
 }
