@@ -39,7 +39,7 @@ public class PaymentController {
   @DeleteMapping("/payment/{id}")
   public Payment deletePayment(@PathVariable Long id) {
     Payment paymentValidator = repository.findByID(id).get();
-    if (paymentValidator.getPaymentStatus() == "Pendante de Processamento"){
+    if (paymentValidator.getPaymentStatus() == "Pendente de Processamento"){
       repository.deleteById(id);
     }
   }
