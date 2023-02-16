@@ -2,6 +2,7 @@ package com.example.paymentapi.controller;
 
 import lombok.AllArgsConstructor;
 
+import java.text.Normalizer;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class PaymentController {
 
   @GetMapping("/payment/filter/payer/{payer}")
   public List<Payment> getPaymentByPayer(@PathVariable String payer) {
-    return repository.findByPayer(payer);
+    return repository.findByPayer(Normalizer.normalize(payer, Normalizer.Form.NFD).replaceAll("[^0-9]", ""));
   }
 
   @GetMapping("/payment/filter/paymentStatus/{paymentStatus}")

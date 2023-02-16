@@ -1,5 +1,6 @@
 package com.example.paymentapi.model.payment;
 
+import java.text.Normalizer;
 import java.util.Arrays;
 
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,14 @@ public class PaymentModel {
   public ResponseEntity<String> newPaymentModel(Payment payment) {
     String[] paymentMethods = {"boleto", "pix", "cartao_credito", "cartao_debito"};
     boolean contains = Arrays.stream(paymentMethods).anyMatch(payment.getPaymentMethod()::equals);
-    
+    Integer payerLength = Normalizer.normalize(payment.getPayer(), Normalizer.Form.NFD).replaceAll("[^0-9]", "").length();
+    payment.setPayer(Normalizer.normalize(payment.getPayer(), Normalizer.Form.NFD).replaceAll("[^0-9]", ""));
+    // Verifica se o CPF ou CNPJ é válido
+    if (payerLength != 11 && payerLength != 14) {
+      return new ResponseEntity<>("Adicione um CPF ou CNPJ válido.",HttpStatus.BAD_REQUEST);
+      
+    }
+
     // Verifica se é credito ou débito para exigir número do cartão caso não haja
     if ((payment.getPaymentMethod().equals(paymentMethods[2]) || payment.getPaymentMethod().equals(paymentMethods[3])) && (payment.getCardNumber() == null || payment.getCardNumber().length() != 16) ){
 

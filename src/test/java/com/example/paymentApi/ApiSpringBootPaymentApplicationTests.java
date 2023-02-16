@@ -27,7 +27,7 @@ class ApiSpringBootPaymentApplicationTests {
 	}
 	@Test
 	public void GetPaymentsListByPayer() throws Exception {
-		this.mockMvc.perform(get("/payment/filter/payer/20351468845")).andDo(print()).andExpect(status().isOk());
+		this.mockMvc.perform(get("/payment/filter/payer/012.345.678-91")).andDo(print()).andExpect(status().isOk());
 	}
 	@Test
 	public void GetPaymentsListByPaymentStatus() throws Exception {
