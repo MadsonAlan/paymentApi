@@ -20,6 +20,22 @@ Para rodar no [VS Code](https://code.visualstudio.com/) pode ir na opção de de
 - [X] Delete Payment
   - [X] With status equal to pending
 
+## Automated Testing
+
+- [ ] Create Payment
+  - [ ] Credit or debit with mandatory card number
+  - [ ] Limiting payment methods
+  - [ ] With status equal to pending
+- [X] Read Payment
+  - [X] Filtered for Payer
+  - [X] Filtered for Debit Code
+  - [X] Filtered for Status
+  - [X] All Payments
+- [ ] Update Payment Status
+  - [ ] With different status of success
+- [ ] Delete Payment
+  - [ ] With status equal to pending
+
 ## Para usar as Rotas
 A documentação das rotas do CRUD estão em src/docs (para melhor experiência use o JSON da data recente)
 
