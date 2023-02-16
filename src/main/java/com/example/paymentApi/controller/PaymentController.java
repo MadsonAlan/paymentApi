@@ -29,10 +29,19 @@ public class PaymentController {
     return repository.findAll();
   }
 
-  @GetMapping("/payment/{id}")
-  public Payment getPaymentByID(@PathVariable Long id) {
-    System.out.println(repository.findById(id).get());
-    return repository.findById(id).get();
+  @GetMapping("/payment/filter/debitCode/{debitCode}")
+  public List<Payment> getPaymentByDebitCode(@PathVariable Integer debitCode) {
+    return repository.findByDebitCode(debitCode);
+  }
+
+  @GetMapping("/payment/filter/payer/{payer}")
+  public List<Payment> getPaymentByPayer(@PathVariable String payer) {
+    return repository.findByPayer(payer);
+  }
+
+  @GetMapping("/payment/filter/paymentStatus/{paymentStatus}")
+  public List<Payment> getPaymentByPaymentStatus(@PathVariable String paymentStatus) {
+    return repository.findByPaymentStatus(paymentStatus);
   }
 
   @PostMapping("/payment/new")

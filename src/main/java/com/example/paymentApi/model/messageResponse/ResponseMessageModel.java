@@ -1,4 +1,4 @@
-package com.example.paymentapi.model.messageResponse;
+package com.example.paymentapi.model.messageresponse;
 
 public class ResponseMessageModel {
   private String message;
