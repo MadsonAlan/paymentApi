@@ -1,5 +1,6 @@
 package com.example.paymentapi.model.payment;
 
+import java.math.BigDecimal;
 import java.text.Normalizer;
 import java.util.Arrays;
 
@@ -34,7 +35,7 @@ public class PaymentModel {
     }
     
     // Verifica se o pagamento é válido
-    if (payment.getPaymentValue().intValue() > 0) {
+    if (payment.getPaymentValue().compareTo(BigDecimal.ZERO) <= 0) {
       return new ResponseEntity<>("Adicione um pagamento com valor maior que 0.",HttpStatus.BAD_REQUEST);
       
     }
