@@ -26,9 +26,16 @@ public class PaymentModel {
     boolean contains = Arrays.stream(paymentMethods).anyMatch(payment.getPaymentMethod()::equals);
     Integer payerLength = Normalizer.normalize(payment.getPayer(), Normalizer.Form.NFD).replaceAll("[^0-9]", "").length();
     payment.setPayer(Normalizer.normalize(payment.getPayer(), Normalizer.Form.NFD).replaceAll("[^0-9]", ""));
+    
     // Verifica se o CPF ou CNPJ é válido
     if (payerLength != 11 && payerLength != 14) {
       return new ResponseEntity<>("Adicione um CPF ou CNPJ válido.",HttpStatus.BAD_REQUEST);
+      
+    }
+    
+    // Verifica se o pagamento é válido
+    if (payment.getPaymentValue().intValue() > 0) {
+      return new ResponseEntity<>("Adicione um pagamento com valor maior que 0.",HttpStatus.BAD_REQUEST);
       
     }
 
