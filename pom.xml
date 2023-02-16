@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>paymentApi</artifactId>
+	<artifactId>paymentapi</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>API Spring Boot Payment</name>
 	<description>Api de pagamento feita usando Spring Boot</description>

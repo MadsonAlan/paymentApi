@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.paymentapi.database.Payment;
 import com.example.paymentapi.database.repository.PaymentRepository;
-import com.example.paymentapi.model.ResponseMessageModel;
-import com.example.paymentapi.model.PaymentModel;
+import com.example.paymentapi.model.payment.PaymentModel;
 
 @RestController
 @AllArgsConstructor
@@ -37,17 +36,17 @@ public class PaymentController {
   }
 
   @PostMapping("/payment/new")
-  public ResponseEntity<ResponseMessageModel> savePayment(@RequestBody Payment payment) {
+  public ResponseEntity<String> savePayment(@RequestBody Payment payment) {
     return paymentModels.newPaymentModel(payment);
   }    
 
   @PutMapping("/payment/{id}")
-  public ResponseEntity<ResponseMessageModel> UpdatePaymentStatus(@PathVariable Long id, @RequestBody Payment payment) {    
+  public ResponseEntity<String> UpdatePaymentStatus(@PathVariable Long id, @RequestBody Payment payment) {    
     return paymentModels.updatePayment(id, payment);
   }
 
   @DeleteMapping("/payment/{id}")
-  public ResponseEntity<ResponseMessageModel> deletePayment(@PathVariable Long id) {
+  public ResponseEntity<String> deletePayment(@PathVariable Long id) {
     return paymentModels.deletePayment(id);
   }
 }
