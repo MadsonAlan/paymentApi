@@ -2,7 +2,6 @@ package com.example.paymentapi.controller;
 
 import lombok.AllArgsConstructor;
 
-import java.text.Normalizer;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
@@ -15,48 +14,52 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.paymentapi.database.Payment;
-import com.example.paymentapi.database.repository.PaymentRepository;
-import com.example.paymentapi.model.payment.PaymentModel;
+import com.example.paymentapi.model.payment.DeletePayment;
+import com.example.paymentapi.model.payment.GetPayment;
+import com.example.paymentapi.model.payment.NewPayment;
+import com.example.paymentapi.model.payment.UpdatePayment;
 
 @RestController
 @AllArgsConstructor
 public class PaymentController {
 
-  private PaymentRepository repository;
-  private PaymentModel paymentModels;
+  private DeletePayment deletePayment;
+  private NewPayment newPaymentModels;
+  private UpdatePayment updatePayment;
+  private GetPayment getPayment;
   
   @GetMapping("/payment/all")
   public List<Payment> getAllPayments() {
-    return repository.findAll();
+    return getPayment.getAllPayments();
   }
 
   @GetMapping("/payment/filter/debitCode/{debitCode}")
   public List<Payment> getPaymentByDebitCode(@PathVariable Integer debitCode) {
-    return repository.findByDebitCode(debitCode);
+    return getPayment.getPaymentByDebitCode(debitCode);
   }
 
   @GetMapping("/payment/filter/payer/{payer}")
   public List<Payment> getPaymentByPayer(@PathVariable String payer) {
-    return repository.findByPayer(Normalizer.normalize(payer, Normalizer.Form.NFD).replaceAll("[^0-9]", ""));
+    return getPayment.getPaymentByPayer(payer);
   }
 
   @GetMapping("/payment/filter/paymentStatus/{paymentStatus}")
   public List<Payment> getPaymentByPaymentStatus(@PathVariable String paymentStatus) {
-    return repository.findByPaymentStatus(paymentStatus);
+    return getPayment.getPaymentByPaymentStatus(paymentStatus);
   }
 
   @PostMapping("/payment/new")
   public ResponseEntity<String> savePayment(@RequestBody Payment payment) {
-    return paymentModels.newPaymentModel(payment);
+    return newPaymentModels.newPaymentModel(payment);
   }    
 
   @PutMapping("/payment/{id}")
   public ResponseEntity<String> UpdatePaymentStatus(@PathVariable Long id, @RequestBody Payment payment) {    
-    return paymentModels.updatePayment(id, payment);
+    return updatePayment.updatePaymentModel(id, payment);
   }
 
   @DeleteMapping("/payment/{id}")
   public ResponseEntity<String> deletePayment(@PathVariable Long id) {
-    return paymentModels.deletePayment(id);
+    return deletePayment.deletePaymentModel(id);
   }
 }
