@@ -1,4 +1,4 @@
-package com.example.paymentapi.model.status;
+package com.example.paymentApi.model.status;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package com.example.paymentapi.model.payment;
+package com.example.paymentApi.model.payment;
 
 import java.math.BigDecimal;
 import java.text.Normalizer;
@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.example.paymentapi.database.Payment;
-import com.example.paymentapi.database.repository.PaymentRepository;
+import com.example.paymentApi.database.Payment;
+import com.example.paymentApi.database.repository.PaymentRepository;
 
 import lombok.AllArgsConstructor;
 

@@ -1,10 +1,10 @@
-package com.example.paymentapi.database.repository;
+package com.example.paymentApi.database.repository;
 
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.example.paymentapi.database.Payment;
+import com.example.paymentApi.database.Payment;
 
 public interface PaymentRepository extends CrudRepository<Payment, Long> {
 

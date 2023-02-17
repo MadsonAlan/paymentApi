@@ -1,4 +1,4 @@
-package com.example.paymentapi;
+package com.example.paymentApi;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

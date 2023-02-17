@@ -1,4 +1,4 @@
-package com.example.paymentapi.controller;
+package com.example.paymentApi.controller;
 
 import lombok.AllArgsConstructor;
 
@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.paymentapi.database.Payment;
-import com.example.paymentapi.model.payment.DeletePayment;
-import com.example.paymentapi.model.payment.GetPayment;
-import com.example.paymentapi.model.payment.NewPayment;
-import com.example.paymentapi.model.payment.UpdatePayment;
+import com.example.paymentApi.database.Payment;
+import com.example.paymentApi.model.payment.DeletePayment;
+import com.example.paymentApi.model.payment.GetPayment;
+import com.example.paymentApi.model.payment.NewPayment;
+import com.example.paymentApi.model.payment.UpdatePayment;
 
 @RestController
 @AllArgsConstructor
